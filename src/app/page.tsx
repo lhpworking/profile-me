@@ -1,113 +1,165 @@
+"use client"
+
+import { Button } from '@/components/ui/atoms/button'
+import { Footer } from '@/components/ui/molecules/footer'
+import { Header, siteConfig } from '@/components/ui/molecules/header'
+import { ProductCard } from '@/components/ui/molecules/product-card'
+import { cn } from '@/lib/utils'
+import { ArrowUpIcon, FileTextIcon, GithubIcon, LinkedinIcon, MailIcon, SendIcon } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
+import React from 'react'
+import { useEffect, useState } from 'react'
+
+const ScrollToTop = () => {
+  const [scroll, setScroll] = React.useState(0)
+
+  useEffect(() => {
+    const scrollToTop = window.addEventListener("scroll", (e) => {
+      console.log(e);
+      if (window.scrollY > 50) {
+        setScroll(1)
+      } else {
+        setScroll(0)
+      }
+    })
+    return () => {
+      window.removeEventListener('scroll', () => scrollToTop)
+    }
+  }, [])
+
+  return (
+    <Button variant={'outline'} asChild className={cn('fixed md:bottom-6 bottom-16 right-6 opacity-0 transition-all border border-dashed border-slate-400', scroll && 'opacity-100')}>
+      <Link href={'#main'} scroll={true}>
+        <ArrowUpIcon className='w-4 h-4'></ArrowUpIcon>
+      </Link>
+    </Button>
+  )
+}
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main id='main'>
+      <ScrollToTop></ScrollToTop>
+      <Header items={siteConfig} ></Header>
+      {/* profile */}
+      <section className='container py-8 flex justify-between flex-wrap gap-6 '>
+        <article className='profile flex-1'>
+          <h2 className='inline-block text-4xl font-normal border-b border-dashed border-slate-400'>Hi!</h2>
+          <h1 className='text-6xl py-6 md:text-8xl font-semibold md:py-12'>I&#39;m <span className='underline decoration-dashed'>Phat Ly</span>,</h1>
+          <h2 className='inline-block text-4xl font-normal border-b border-dashed border-slate-400'>Frontend Developer.</h2>
+          <p className='inline-block text-base py-6'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto doloremque consequatur voluptatibus qui blanditiis voluptas repudiandae, repellat illum. Quaerat ab sunt rem? Esse culpa maxime doloremque veniam repellendus ullam accusamus.</p>
+          <div className='flex items-center gap-2 flex-wrap py-4'>
+            <Button variant={'outline'} className='gap-2 items-center min-w-[140px] border border-dashed border-slate-400' asChild>
+              <Link href={'/'}>
+                Résumé
+                <FileTextIcon className='w-4 h-4'></FileTextIcon>
+              </Link>
+            </Button>
+            <Button className='gap-2 items-center min-w-[140px]' asChild>
+              <Link href={'mailto:lhpworking@gmail.com'}>
+                Contact me
+                <SendIcon className='w-4 h-4'></SendIcon>
+              </Link>
+            </Button>
+          </div>
+
+          {/* language */}
+          <div className='py-2'>
+            <h3 className='font-medium text-lg py-4'>Languages</h3>
+            <div className='flex items-center gap-2'>
+              <Button variant={'outline'} className='dashed-cus'>
+                Vietnamese
+              </Button>
+              <Button variant={'outline'} className='dashed-cus'>
+               English (basic)
+              </Button>
+            </div>
+          </div>
+
+          {/* socials */}
+          <div className='py-2'>
+            <h3 className='font-medium text-lg py-4'>Socials</h3>
+            <div className='flex items-center gap-2'>
+              <Button variant={'outline'} className='dashed-cus'>
+                <Link href={'/github'}><GithubIcon></GithubIcon></Link>
+              </Button>
+              <Button variant={'outline'} className='dashed-cus'>
+                <Link href={'/github'}><LinkedinIcon></LinkedinIcon></Link>
+              </Button>
+            </div>
+          </div>
+
+          {/* skill */}
+          <div className='py-2'>
+            <h3 className='font-medium text-lg py-4'>skills</h3>
+            <div className='flex items-center gap-2 flex-wrap'>
+              <Button variant={'outline'} className='dashed-cus'>
+                HTML
+              </Button>
+              <Button variant={'outline'} className='dashed-cus' >
+                CSS
+              </Button>
+              <Button variant={'outline'} className='dashed-cus' >
+                JS
+              </Button>
+              <Button variant={'outline'} className='dashed-cus' >
+                Git
+              </Button>
+              <Button variant={'outline'} className='dashed-cus' >
+                ReactJs
+              </Button>
+              <Button variant={'outline'} className='dashed-cus' >
+                NextJs
+              </Button>
+              <Button variant={'outline'} className='dashed-cus' >
+                TailwindCss
+              </Button>
+              <Button variant={'outline'} className='dashed-cus' >
+                Figma
+              </Button>
+            </div>
+          </div>
+        </article>
+        <article className='image border border-dashed border-slate-400 p-4 rounded-sm aspect-square '>
+          <Image src={'/phat.jpeg'} alt={'phat'} width={500} height={500} className='w-full h-full object-contain'></Image>
+        </article>
+      </section>
+      {/* product */}
+      <section id='product'>
+        <div className='container py-8'>
+          <div className='flex items-center justify-center py-16'>
+            <h2 className='inline-block text-8xl font-medium'>Pro</h2>
+            <Image className='aspect-square w-full md:max-w-[400px] object-contain' src={'/produck.png'} width={400} height={300} alt={'product'}></Image>
+          </div>
+          <article className='flex flex-col gap-6'>
+            <ProductCard title={'HoaTruyen Project'} desc='Role: Frontend' imgSrc={'https://media.istockphoto.com/id/517188688/photo/mountain-landscape.jpg?b=1&s=612x612&w=0&k=20&c=81f5HaMtoPNUrdfa4hnS8NcwEgD9tH2nnTUBu25Msug='} alt='product-1' webLink={'hoaTruyen.com'} detailsLink={'/hoatruyen'}></ProductCard>
+            <ProductCard title={'HoaTruyen Project'} desc='Role: Frontend' imgSrc={'https://media.istockphoto.com/id/517188688/photo/mountain-landscape.jpg?b=1&s=612x612&w=0&k=20&c=81f5HaMtoPNUrdfa4hnS8NcwEgD9tH2nnTUBu25Msug='} alt='product-1' webLink={'hoaTruyen.com'} detailsLink={'/hoatruyen'}></ProductCard>
+            <ProductCard title={'HoaTruyen Project'} desc='Role: Frontend' imgSrc={'https://media.istockphoto.com/id/517188688/photo/mountain-landscape.jpg?b=1&s=612x612&w=0&k=20&c=81f5HaMtoPNUrdfa4hnS8NcwEgD9tH2nnTUBu25Msug='} alt='product-1' webLink={'hoaTruyen.com'} detailsLink={'/hoatruyen'}></ProductCard>
+          </article>
         </div>
-      </div>
+      </section>
+      {/* contact */}
+      <section id='contact'>
+        <div className='container py-8'>
+          <div className='flex items-center justify-center py-16'>
+            <Image className='aspect-square w-full md:max-w-[400px] object-contain' src={'/contact.png'} width={400} height={300} alt={'product'}></Image>
+            <h2 className='inline-block text-8xl font-medium'>tact</h2>
+          </div>
+          <article className='flex flex-col gap-6 justify-center items-center'>
+            <div className='phone font-medium text-4xl md:text-6xl'>
+              <label htmlFor="phone">Phone: </label>
+              <span id='phone' className='border-b border-dashed border-slate-400'>+84932791657</span>
+            </div>
+            <div className='email font-medium text-4xl md:text-6xl'>
+              <label htmlFor="email">Email: </label>
+              <Link id='email' href={'mailto:lhpworking@gmail.com'} className='border-b border-dashed border-slate-400'>lhpworking@gmail.com</Link>
+            </div>
+          </article>
+        </div>
+      </section>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      <Footer></Footer>
     </main>
   )
 }

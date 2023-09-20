@@ -74,3 +74,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .dashed-cus {
+    @apply border border-dashed !border-slate-400;
+  }
+}
