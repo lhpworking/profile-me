@@ -18,7 +18,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
     desc,
     imgSrc,
     alt,
-    detailsLink= '/hoaTruyen',
+    detailsLink,
     webLink = '/',
 }) => {
     return (
@@ -36,7 +36,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             </CardContent>
             <CardFooter className="flex justify-end gap-2">
                     <Button variant={'outline'} className="items-center gap-1 font-medium text-sm border border-dashed border-slate-400" asChild>
-                        <Link href={detailsLink}>
+                        <Link href={`/product/${detailsLink}`} as={`/product/${detailsLink}`}>
                             Details
                             <LayersIcon className="w-4 h-4"></LayersIcon>
                         </Link>
